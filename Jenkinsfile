@@ -44,6 +44,8 @@ pipeline {
         stage('Terraform Init') {
             steps {
                 sh '''
+                az login --identity --output jsonc
+                az account set --subscription $ARM_SUBSCRIPTION_ID
                 echo "Initialising Terraform"
                 terraform init \
                     --upgrade \
@@ -66,6 +68,8 @@ pipeline {
         stage('Terraform Plan') {
             steps {
                 sh '''
+                az login --identity --output jsonc
+                az account set --subscription $ARM_SUBSCRIPTION_ID
                 echo "Terraform Plan"
                 terraform plan --input=false
                 '''
@@ -83,6 +87,8 @@ pipeline {
         stage('Terraform Apply') {
             steps {
                 sh '''
+                az login --identity --output jsonc
+                az account set --subscription $ARM_SUBSCRIPTION_ID
                 echo "Terraform Apply"
                 terraform apply --input=false --auto-approve
                 '''
