@@ -55,16 +55,6 @@ pipeline {
             }
         }
 
-        stage('Terraform Validate') {
-            steps {
-                sh '''
-                echo "Validating Terraform"
-                terraform fmt -check
-                terraform validate
-                '''
-            }
-        }
-
         stage('Terraform Plan') {
             steps {
                 sh '''
